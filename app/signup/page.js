@@ -1,8 +1,11 @@
 
 const page = () => {
-  const user = {
-    username: e.get("username"),
-    password: e.get("password")
+  const submit = () => {
+    const user = {
+      username: e.get("username"),
+      password: e.get("password")
+    }
+    console.log(user)
   }
   return (
     <form action={submit}>
