@@ -9,11 +9,8 @@ export async function POST(req, res) {
 
     await connectDB();
 
-    const user = {
-        username: "baseerdd",
-        password: "shuw829833u"
-    }
-
+    const user = await req.json()
+    console.log("rpute user si : ", user)
     const { username, password } = user
 
     bcrypt.genSalt(10, function (err, salt) {
@@ -39,7 +36,6 @@ export async function POST(req, res) {
     // const cookieStore = cookies(); // this is already fine, but in some versions:
     const cookieStore = await cookies();
 
-    // 3. Set token as cookie (no options!)
     cookieStore.set("token", token);
 
 
