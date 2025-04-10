@@ -1,13 +1,14 @@
-"use server"
+// In a client component
+'use client'
+import { useRouter } from 'next/navigation'
 
-import { cookies } from 'next/headers'
-import { NextResponse } from 'next/server';
+export default function LogoutButton() {
+  const router = useRouter()
 
-export default async function GET() {
-  const cookieStore = await cookies()
+  const handleLogout = async () => {
+    await fetch('/api/logout') // triggers the server route
+    router.push('/') // redirect to homepage after logout
+  }
 
-    
-  cookieStore.set("token", "");
-
-  return NextResponse.redirect('/')
+  return <button onClick={handleLogout}>Logout</button>
 }
