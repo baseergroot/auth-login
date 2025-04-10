@@ -1,23 +1,30 @@
-"use client"
+import { cookies } from 'next/headers'
+import jwt from 'jsonwebtoken'
 
-import axios from "axios";
-import { useEffect, useState } from "react";
+export default async function HomePage() {
+  const cookieStore = await cookies()
+  const token = cookieStore.get('token')?.value
 
-export default function Home() {
-  const [data, setData] = useState("hello")
-  useEffect(() => {
-    axios.post('http://localhost:3000/api/signup')
-    .then((response) => {
-      setData(response.data.msg)
-      console.log(response)})
-      .catch((error) => {
-        console.log("error is : ", error)
-      })
+  let isLoggedIn = false
+
+  if (token) {
+    try {
+      jwt.verify(token, 'shhhhh') // use your secret
+      isLoggedIn = true
+    } catch (e) {
+      isLoggedIn = false
     }
-    )
+  }
+
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-    {data}
+    <div>
+      {isLoggedIn ? (
+        <h1>✅ You are logged in!</h1>
+      ) : (
+        <div>
+          <a href="/signup">Signup</a> | <a href="/login">Login</a>
+        </div>
+      )}
     </div>
-  );
+  )
 }
