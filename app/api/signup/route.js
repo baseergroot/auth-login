@@ -21,11 +21,11 @@ export async function POST(req, res) {
   if (userexist) {
     console.log(userexist, " user already exist");
     return NextResponse.json({ message: "Username already exists" });
-  } else {
-    const user = new User({ username, password: hash });
-    await user.save();
-    return NextResponse.json({ message: "User created successfully" });
-  }
+  } 
+    const newUser = new User({ username, password: hash });
+    await newUser.save();
+   
+  
 
   const token = jwt.sign({ username }, "shhhhh");
   console.log("token is : ", token);
@@ -35,5 +35,5 @@ export async function POST(req, res) {
 
   cookieStore.set("token", token);
 
-  return NextResponse.json({ msg: "hello from route", success: true });
+  return NextResponse.json({ message: "User created successfully" });
 }

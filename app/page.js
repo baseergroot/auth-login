@@ -19,7 +19,10 @@ export default async function HomePage() {
   return (
     <div>
       {isLoggedIn ? (
+        <>
         <h1>✅ You are logged in!</h1>
+        <a href="/logout">Logout</a>
+        </>
       ) : (
         <div>
           <a href="/signup">Signup</a> | <a href="/login">Login</a>
