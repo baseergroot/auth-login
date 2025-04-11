@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import {useState} from "react"
+import {useState, useEffect} from "react";
 
 export default function CreateNoteButton() {
   const createNote = async () => {
@@ -31,8 +31,8 @@ export default function CreateNoteButton() {
   };
 
   const [notes , setNotes] = useState([])
-  
-    const show = () => {
+
+    useEffect(() => {
       axios.get("http://localhost:3000/api/shownotes")
       .then((res) => {
         console.log("response is :", res.data)
@@ -42,7 +42,7 @@ export default function CreateNoteButton() {
       .catch((err) => {
         console.log("error is :", err)
         })
-    }
+    },[])
 
   return (
     <>
@@ -53,7 +53,6 @@ export default function CreateNoteButton() {
       Send Note
     </button>
 
-<button onClick={show} className='bg-orange-500 rounded px-1 px-4 cursor-pointer'>show</button>
 {
   notes.map((note) => (
     <div key={note._id}>
