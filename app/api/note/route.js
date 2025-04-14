@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+
 import connectDB from "@/lib/mongodb";
 import jwt from "jsonwebtoken";
 import Note from "@/models/Note";
@@ -26,7 +26,7 @@ const userId = decoded.id;
 
 
 
-  const newNote = new Note({title: "love nm", content: "i love naeema vhh", user: userId})
+  const newNote = new Note({title: "working", content: "it work", user: userId})
 
   await newNote.save()
 
